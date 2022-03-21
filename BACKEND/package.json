@@ -11,7 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/hapi": "^20.2.1",
+    "axios": "^0.26.1",
     "hapi-routes-prefixer": "^3.0.0",
-    "joi": "^17.6.0"
+    "joi": "^17.6.0",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.17.0",
+    "xml2json": "^0.12.0"
   }
 }
