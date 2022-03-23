@@ -63,6 +63,7 @@ const init = async () => {
     path: prefix + "/syncproduct",
     options: {
       handler: async (req, h) => {
+        await Product.destroy({ where: {}, truncate: true });
         let data;
         await axios
           .get("http://api.elevenia.co.id/rest/prodservices/product/listing", {
@@ -123,7 +124,9 @@ const init = async () => {
     options: {
       handler: async (req, h) => {
         let data;
-        data = await Product.findAll();
+        data = await Product.findAll({
+          order: [["id_product", "DESC"]],
+        });
         let res = {
           code: 200,
           success: true,
@@ -140,28 +143,56 @@ const init = async () => {
     method: "POST",
     path: prefix + "/product",
     options: {
-      handler: (req, h) => {
-        let res = [
-          {
-            nama: "faisal",
-          },
-        ];
-        return h.response(res);
+      validate: {
+        payload: Joi.object({
+          name: Joi.string().required(),
+          sku: Joi.string().required(),
+          product_no: Joi.string().required(),
+          desc: Joi.string().required(),
+        }),
+      },
+      handler: async (req, h) => {
+        await Product.create(req.payload);
+        let res = {
+          code: 200,
+          success: true,
+          message: "Success create product",
+          data: req.payload,
+          error: [],
+        };
+        return h.response(res).code(res.code);
       },
     },
   });
 
   server.route({
     method: "DELETE",
-    path: prefix + "/product",
+    path: prefix + "/product/{id}",
     options: {
-      handler: (req, h) => {
-        let res = [
-          {
-            nama: "faisal",
-          },
-        ];
-        return h.response(res);
+      validate: {
+        params: Joi.object({
+          id: Joi.number().required(),
+        }),
+      },
+      handler: async (req, h) => {
+        let res = {
+          code: 200,
+          success: true,
+          message: "Success Delete product",
+          data: null,
+          error: [],
+        };
+        let data = await Product.findOne({ where: { id_product: req.params.id } });
+        if (data != null) {
+          res.code = 200;
+          res.data = data.dataValues
+          await Product.destroy({ where: { id_product: req.params.id } });
+        } else {
+          res.code = 500;
+          res.message = "Product can't be found";
+          res.success = false;
+        }
+        return h.response(res).code(res.code);
       },
     },
   });
@@ -172,18 +203,34 @@ const init = async () => {
     options: {
       validate: {
         params: Joi.object({
-          id: Joi.number().min(3).max(10).label("Id Harus Number"),
+          id: Joi.number().required(),
+        }),
+        payload: Joi.object({
+          name: Joi.string().required(),
+          sku: Joi.string().required(),
+          product_no: Joi.string().required(),
+          desc: Joi.string().required(),
         }),
       },
-      handler: (req, h) => {
-        let data = req.params.id;
-        console.log(data);
-        let res = [
-          {
-            nama: "faisal",
-          },
-        ];
-        return h.response(res);
+      handler: async (req, h) => {
+        let res = {
+          code: 200,
+          success: true,
+          message: "Success Update product",
+          data: null,
+          error: [],
+        };
+        let data = await Product.findOne({ where: { id_product: req.params.id } });
+        if (data != null) {
+          res.code = 200;
+          res.data = data.dataValues
+          await Product.update(req.payload, { where: { id_product: req.params.id } });
+        } else {
+          res.code = 500;
+          res.message = "Product can't be found";
+          res.success = false;
+        }
+        return h.response(res).code(res.code);
       },
     },
   });

@@ -1,5 +1,5 @@
-run frontend:
+run-frontend:
 	cd frontend && yarn dev
 
-run backend:
+run-backend:
 	cd backend && yarn start
