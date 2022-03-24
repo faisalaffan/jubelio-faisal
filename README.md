@@ -1,0 +1,4 @@
+- Pastikan backend & frontend sudah di `yarn` / `npm install`
+- Pastikan database di file `BACKEND/db_dump` sudah di backup
+- Sudah saya sertakan makefile untuk running. `make run-backend` / `make run-frontend`
+- Untuk testing API sudah ada di folder `postman_collections`

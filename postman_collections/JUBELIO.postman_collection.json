@@ -1,0 +1,195 @@
+{
+	"info": {
+		"_postman_id": "5a339ca8-3406-4fd1-b1fc-de8a27be9b18",
+		"name": "JUBELIO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PRODUCT",
+			"item": [
+				{
+					"name": "GET PRODUCT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/product",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SYNC PRODUCT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/syncproduct",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"syncproduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INSERT PRODUCT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"faisal\",\n    \"sku\": \"faisal\",\n    \"product_no\": \"120\",\n    \"desc\": \"Halo ini desc\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/product",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE PRODUCT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"faisals\",\n    \"sku\": \"faisal\",\n    \"product_no\": \"120\",\n    \"desc\": \"Halo ini desc\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/product/10",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"product",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE PRODUCT",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/product/101",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"product",
+								"101"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GET PRODUCT FROM API",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "openapikey",
+						"value": "721407f393e84a28593374cc2b347a98",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://api.elevenia.co.id/rest/prodservices/product/listing",
+					"protocol": "http",
+					"host": [
+						"api",
+						"elevenia",
+						"co",
+						"id"
+					],
+					"path": [
+						"rest",
+						"prodservices",
+						"product",
+						"listing"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET DETAIL",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "openapikey",
+						"value": "721407f393e84a28593374cc2b347a98",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://api.elevenia.co.id/rest/prodservices/product/details/1",
+					"protocol": "http",
+					"host": [
+						"api",
+						"elevenia",
+						"co",
+						"id"
+					],
+					"path": [
+						"rest",
+						"prodservices",
+						"product",
+						"details",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
