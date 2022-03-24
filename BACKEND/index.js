@@ -55,6 +55,9 @@ const init = async () => {
   const server = Hapi.server({
     port: 3000,
     host: "localhost",
+    routes: {
+      cors: true,
+    },
   });
 
   let prefix = "/api/v1";
@@ -182,10 +185,12 @@ const init = async () => {
           data: null,
           error: [],
         };
-        let data = await Product.findOne({ where: { id_product: req.params.id } });
+        let data = await Product.findOne({
+          where: { id_product: req.params.id },
+        });
         if (data != null) {
           res.code = 200;
-          res.data = data.dataValues
+          res.data = data.dataValues;
           await Product.destroy({ where: { id_product: req.params.id } });
         } else {
           res.code = 500;
@@ -220,11 +225,15 @@ const init = async () => {
           data: null,
           error: [],
         };
-        let data = await Product.findOne({ where: { id_product: req.params.id } });
+        let data = await Product.findOne({
+          where: { id_product: req.params.id },
+        });
         if (data != null) {
           res.code = 200;
-          res.data = data.dataValues
-          await Product.update(req.payload, { where: { id_product: req.params.id } });
+          res.data = data.dataValues;
+          await Product.update(req.payload, {
+            where: { id_product: req.params.id },
+          });
         } else {
           res.code = 500;
           res.message = "Product can't be found";
